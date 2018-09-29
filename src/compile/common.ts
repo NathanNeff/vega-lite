@@ -6,6 +6,7 @@ import {
   FieldDef,
   FieldDefBase,
   FieldRefOption,
+  isPositionFieldDef,
   isScaleFieldDef,
   isTimeFieldDef,
   OrderFieldDef,
@@ -95,6 +96,7 @@ export function formatSignalRef(
   config: Config
 ) {
   const format = numberFormat(fieldDef, specifiedFormat, config);
+  const timeFormat = isPositionFieldDef(fieldDef) && fieldDef.axis && fieldDef.axis.timeFormat;
   if (isBinning(fieldDef.bin)) {
     const startField = vgField(fieldDef, {expr});
     const endField = vgField(fieldDef, {expr, binSuffix: 'end'});
@@ -105,13 +107,15 @@ export function formatSignalRef(
     return {
       signal: `${formatExpr(vgField(fieldDef, {expr, binSuffix: 'range'}), format)}`
     };
-  } else if (isTimeFieldDef(fieldDef)) {
+  } else if (isTimeFieldDef(fieldDef) || timeFormat) {
     const isUTCScale = isScaleFieldDef(fieldDef) && fieldDef['scale'] && fieldDef['scale'].type === ScaleType.UTC;
     return {
       signal: timeFormatExpression(
-        vgField(fieldDef, {expr}),
+        vgField(fieldDef, {
+          expr
+        }),
         fieldDef.timeUnit,
-        specifiedFormat,
+        timeFormat ? timeFormat : specifiedFormat,
         config.text.shortTimeLabels,
         config.timeFormat,
         isUTCScale,
@@ -119,9 +123,7 @@ export function formatSignalRef(
       )
     };
   } else {
-    return {
-      signal: `''+${vgField(fieldDef, {expr})}`
-    };
+    return {signal: `''+${vgField(fieldDef, {expr})}`};
   }
 }
 

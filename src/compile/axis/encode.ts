@@ -16,13 +16,13 @@ export function labels(model: UnitModel, channel: PositionScaleChannel, specifie
   let labelsSpec: any = {};
 
   // Text
-  if (isTimeFieldDef(fieldDef)) {
+  if (isTimeFieldDef(fieldDef) || axis.timeFormat) {
     const isUTCScale = model.getScaleComponent(channel).get('type') === ScaleType.UTC;
 
     const expr = timeFormatExpression(
       'datum.value',
       fieldDef.timeUnit,
-      axis.format,
+      axis.timeFormat ? axis.timeFormat : axis.format,
       config.axis.shortTimeLabels,
       null,
       isUTCScale

@@ -36,7 +36,7 @@
               "title": "Year (year)",
               "type": "temporal",
               "field": "year_Year",
-              "axis": {"format": "%Y"}
+              "axis": {"timeFormat": "%Y"}
             }
           }
         },
@@ -58,7 +58,7 @@
               "title": "Year (year)",
               "type": "temporal",
               "field": "year_Year",
-              "axis": {"format": "%Y"}
+              "axis": {"timeFormat": "%Y"}
             }
           }
         },
@@ -80,7 +80,7 @@
               "title": "Year (year)",
               "type": "temporal",
               "field": "year_Year",
-              "axis": {"format": "%Y"}
+              "axis": {"timeFormat": "%Y"}
             }
           }
         }
