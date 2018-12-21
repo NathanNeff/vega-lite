@@ -33,16 +33,8 @@
               "axis": {"format": "%Y"}
             },
             "tooltip": [
-              {
-                "field": "upper_ci1",
-                "type": "quantitative",
-                "title": "Upper error of ci1"
-              },
-              {
-                "field": "lower_ci1",
-                "type": "quantitative",
-                "title": "Lower error of ci1"
-              },
+              {"field": "lower_ci1", "type": "quantitative", "title": "ci1"},
+              {"field": "upper_ci1", "type": "quantitative", "title": "ci0"},
               {
                 "title": "Year (year)",
                 "type": "temporal",

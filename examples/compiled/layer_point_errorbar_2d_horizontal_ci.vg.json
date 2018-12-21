@@ -13,9 +13,9 @@
         {
           "type": "aggregate",
           "groupby": ["variety"],
-          "ops": ["mean", "ci0", "ci1"],
-          "fields": ["yield", "yield", "yield"],
-          "as": ["mean_yield", "lower_yield", "upper_yield"]
+          "ops": ["mean", "ci1"],
+          "fields": ["yield", "yield"],
+          "as": ["mean_yield", "upper_yield"]
         }
       ]
     }
@@ -40,7 +40,7 @@
             {"value": "black"}
           ],
           "tooltip": {
-            "signal": "{\"Upper error of yield\": format(datum[\"upper_yield\"], \"\"), \"Lower error of yield\": format(datum[\"lower_yield\"], \"\"), \"variety\": ''+datum[\"variety\"]}"
+            "signal": "{\"ci1 of yield\": format(datum[\"upper_yield\"], \"\"), \"ci0 of yield\": format(datum[\"lower_yield\"], \"\"), \"variety\": ''+datum[\"variety\"]}"
           },
           "x": {"scale": "x", "field": "lower_yield"},
           "y": {"scale": "y", "field": "variety", "band": 0.5},

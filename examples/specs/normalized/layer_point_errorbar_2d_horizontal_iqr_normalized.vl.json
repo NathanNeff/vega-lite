@@ -6,7 +6,7 @@
       "transform": [
         {
           "aggregate": [
-            {"op": "q1", "field": "yield", "as": "lower_yield"},
+            {"op": "q3", "field": "yield", "as": "lower_yield"},
             {"op": "q3", "field": "yield", "as": "upper_yield"}
           ],
           "groupby": ["variety"]
@@ -28,12 +28,12 @@
               {
                 "field": "upper_yield",
                 "type": "quantitative",
-                "title": "Upper error of yield"
+                "title": "q3 of yield"
               },
               {
                 "field": "lower_yield",
                 "type": "quantitative",
-                "title": "Lower error of yield"
+                "title": "q1 of yield"
               },
               {"field": "variety", "type": "ordinal"}
             ]

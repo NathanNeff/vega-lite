@@ -20,7 +20,7 @@
       "transform": [
         {
           "aggregate": [
-            {"op": "ci0", "field": "yield", "as": "lower_yield"},
+            {"op": "ci1", "field": "yield", "as": "lower_yield"},
             {"op": "ci1", "field": "yield", "as": "upper_yield"}
           ],
           "groupby": ["variety"]
@@ -41,12 +41,12 @@
               {
                 "field": "upper_yield",
                 "type": "quantitative",
-                "title": "Upper error of yield"
+                "title": "ci1 of yield"
               },
               {
                 "field": "lower_yield",
                 "type": "quantitative",
-                "title": "Lower error of yield"
+                "title": "ci0 of yield"
               },
               {"field": "variety", "type": "ordinal"}
             ]

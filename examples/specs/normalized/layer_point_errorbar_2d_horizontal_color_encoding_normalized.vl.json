@@ -40,12 +40,12 @@
               {
                 "field": "upper_yield",
                 "type": "quantitative",
-                "title": "Upper error of yield"
+                "title": "mean + stderr of yield"
               },
               {
                 "field": "lower_yield",
                 "type": "quantitative",
-                "title": "Lower error of yield"
+                "title": "mean - stderr of yield"
               },
               {"field": "variety", "type": "ordinal"}
             ]
@@ -70,12 +70,12 @@
               {
                 "field": "upper_yield",
                 "type": "quantitative",
-                "title": "Upper error of yield"
+                "title": "mean + stderr of yield"
               },
               {
                 "field": "lower_yield",
                 "type": "quantitative",
-                "title": "Lower error of yield"
+                "title": "mean - stderr of yield"
               },
               {"field": "variety", "type": "ordinal"}
             ]
@@ -97,12 +97,12 @@
               {
                 "field": "upper_yield",
                 "type": "quantitative",
-                "title": "Upper error of yield"
+                "title": "mean + stderr of yield"
               },
               {
                 "field": "lower_yield",
                 "type": "quantitative",
-                "title": "Lower error of yield"
+                "title": "mean - stderr of yield"
               },
               {"field": "variety", "type": "ordinal"}
             ]

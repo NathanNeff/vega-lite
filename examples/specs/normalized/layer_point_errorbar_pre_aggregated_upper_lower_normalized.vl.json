@@ -48,14 +48,14 @@
             "y": {"field": "variety", "type": "ordinal"},
             "tooltip": [
               {
-                "field": "upper_upper_yield",
-                "type": "quantitative",
-                "title": "Upper error of upper_yield"
-              },
-              {
                 "field": "lower_upper_yield",
                 "type": "quantitative",
-                "title": "Lower error of upper_yield"
+                "title": "upper_yield"
+              },
+              {
+                "field": "upper_upper_yield",
+                "type": "quantitative",
+                "title": "lower_yield"
               },
               {"field": "variety", "type": "ordinal"}
             ]
