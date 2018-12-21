@@ -300,7 +300,7 @@ export function errorBarParams<
     continuousAxis
   } = compositeMarkContinuousAxis(spec, orient, compositeMark);
 
-  const {errorBarSpecificAggregate, postAggregateCalculates} = errorBarAggregationAndCalculation(
+  const {errorBarSpecificAggregate, postAggregateCalculates, tooltipSummary} = errorBarAggregationAndCalculation(
     markDef,
     continuousAxisChannelDef,
     continuousAxisChannelDef2,
@@ -330,14 +330,11 @@ export function errorBarParams<
   const aggregate: AggregatedFieldDef[] = [...oldAggregate, ...errorBarSpecificAggregate];
   const groupby: string[] = inputType !== 'raw' ? [] : oldGroupBy;
 
-  const tooltopSummary: CompositeMarkTooltipSummary[] = [
-    {fieldPrefix: 'upper', titlePrefix: 'Upper error'},
-    {fieldPrefix: 'lower', titlePrefix: 'Lower error'}
-  ];
   const tooltipEncoding: Encoding<string> = getCompositeMarkTooltip(
-    tooltopSummary,
+    tooltipSummary,
     continuousAxisChannelDef,
-    encodingWithoutContinuousAxis
+    encodingWithoutContinuousAxis,
+    inputType === 'raw'
   );
 
   return {
@@ -374,10 +371,13 @@ function errorBarAggregationAndCalculation<
 ): {
   postAggregateCalculates: CalculateTransform[];
   errorBarSpecificAggregate: AggregatedFieldDef[];
+  tooltipSummary: CompositeMarkTooltipSummary[];
 } {
   let errorBarSpecificAggregate: AggregatedFieldDef[] = [];
   let postAggregateCalculates: CalculateTransform[] = [];
   const continuousFieldName: string = continuousAxisChannelDef.field;
+
+  let tooltipSummary: CompositeMarkTooltipSummary[];
 
   if (inputType === 'raw') {
     const center: ErrorBarCenter = markDef.center
@@ -409,20 +409,35 @@ function errorBarAggregationAndCalculation<
           as: 'lower_' + continuousFieldName
         }
       ];
+
+      tooltipSummary = [
+        {fieldPrefix: 'upper', titlePrefix: titleCase(center, extent, '+')},
+        {fieldPrefix: 'lower', titlePrefix: titleCase(center, extent, '-')}
+      ];
     } else {
       if (markDef.center && markDef.extent) {
         log.warn(log.message.errorBarCenterIsNotNeeded(markDef.extent, compositeMark));
       }
 
+      const upperExtent = extent === 'ci' ? 'ci1' : 'q3';
+      const lowerExtent = extent === 'ci' ? 'ci0' : 'q1';
+
       errorBarSpecificAggregate = [
-        {op: extent === 'ci' ? 'ci0' : 'q1', field: continuousFieldName, as: 'lower_' + continuousFieldName},
-        {op: extent === 'ci' ? 'ci1' : 'q3', field: continuousFieldName, as: 'upper_' + continuousFieldName}
+        {op: upperExtent, field: continuousFieldName, as: 'lower_' + continuousFieldName},
+        {op: upperExtent, field: continuousFieldName, as: 'upper_' + continuousFieldName}
+      ];
+
+      tooltipSummary = [
+        {fieldPrefix: 'upper', titlePrefix: upperExtent},
+        {fieldPrefix: 'lower', titlePrefix: lowerExtent}
       ];
     }
   } else {
     if (markDef.center || markDef.extent) {
       log.warn(log.message.errorBarCenterAndExtentAreNotNeeded(markDef.center, markDef.extent));
     }
+
+    tooltipSummary = [];
 
     if (inputType === 'aggregated-upper-lower') {
       postAggregateCalculates = [
@@ -449,6 +464,17 @@ function errorBarAggregationAndCalculation<
         });
       }
     }
+
+    for (const postAggregateCalculate of postAggregateCalculates) {
+      tooltipSummary.push({
+        fieldPrefix: postAggregateCalculate.as.substring(0, 5),
+        titlePrefix: postAggregateCalculate.calculate.replace(new RegExp('datum.', 'g'), '')
+      });
+    }
   }
-  return {postAggregateCalculates, errorBarSpecificAggregate};
+  return {postAggregateCalculates, errorBarSpecificAggregate, tooltipSummary};
+}
+
+function titleCase(center: ErrorBarCenter, extent: ErrorBarExtent, operation: '+' | '-'): string {
+  return center + ' ' + operation + ' ' + extent;
 }

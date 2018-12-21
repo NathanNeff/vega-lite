@@ -62,8 +62,8 @@ describe('normalizeErrorBar with raw data input', () => {
             y2: {field: 'upper_people', type: 'quantitative'},
             x: {field: 'age', type: 'ordinal'},
             tooltip: [
-              {field: 'upper_people', title: 'Upper error of people', type: 'quantitative'},
-              {field: 'lower_people', title: 'Lower error of people', type: 'quantitative'},
+              {field: 'upper_people', title: 'mean + stderr of people', type: 'quantitative'},
+              {field: 'lower_people', title: 'mean - stderr of people', type: 'quantitative'},
               {field: 'age', type: 'ordinal'}
             ]
           }
@@ -668,8 +668,8 @@ describe('normalizeErrorBar with aggregated upper and lower bound input', () => 
             y2: {field: 'upper_people', type: 'quantitative'},
             x: {field: 'age', type: 'ordinal'},
             tooltip: [
-              {field: 'upper_people', title: 'Upper error of people', type: 'quantitative'},
-              {field: 'lower_people', title: 'Lower error of people', type: 'quantitative'},
+              {field: 'lower_people', title: 'people', type: 'quantitative'},
+              {field: 'upper_people', title: 'people2', type: 'quantitative'},
               {field: 'age', type: 'ordinal'}
             ]
           }
@@ -895,8 +895,8 @@ describe('normalizeErrorBar with aggregated error input', () => {
             y2: {field: 'upper_people', type: 'quantitative'},
             x: {field: 'age', type: 'ordinal'},
             tooltip: [
-              {field: 'upper_people', title: 'Upper error of people', type: 'quantitative'},
-              {field: 'lower_people', title: 'Lower error of people', type: 'quantitative'},
+              {field: 'upper_people', title: 'people + people_error', type: 'quantitative'},
+              {field: 'lower_people', title: 'people - people_error', type: 'quantitative'},
               {field: 'age', type: 'ordinal'}
             ]
           }
@@ -978,6 +978,18 @@ describe('normalizeErrorBar with aggregated error input', () => {
         ).toBe(true);
       } else {
         expect(false).toBe(true);
+      }
+    }
+
+    if (isLayerSpec(outputSpec)) {
+      const unit = outputSpec.layer[0];
+      if (isUnitSpec(unit)) {
+        const tooltip = unit.encoding.tooltip;
+        expect(tooltip).toEqual([
+          {field: 'upper_people', title: 'people + people_error', type: 'quantitative'},
+          {field: 'lower_people', title: 'people + people_error2', type: 'quantitative'},
+          {field: 'age', type: 'ordinal'}
+        ]);
       }
     }
   });

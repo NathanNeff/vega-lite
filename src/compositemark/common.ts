@@ -39,13 +39,14 @@ export interface CompositeMarkTooltipSummary {
 export function getCompositeMarkTooltip(
   tooltipSummary: CompositeMarkTooltipSummary[],
   continuousAxisChannelDef: PositionFieldDef<string>,
-  encodingWithoutContinuousAxis: Encoding<string>
+  encodingWithoutContinuousAxis: Encoding<string>,
+  withFieldName: boolean = true
 ): Encoding<string> {
   const fiveSummaryTooltip: TextFieldDef<string>[] = tooltipSummary.map(
     ({fieldPrefix, titlePrefix}): TextFieldDef<string> => ({
       field: fieldPrefix + '_' + continuousAxisChannelDef.field,
       type: continuousAxisChannelDef.type,
-      title: titlePrefix + ' of ' + continuousAxisChannelDef.field
+      title: titlePrefix + (withFieldName ? ' of ' + continuousAxisChannelDef.field : '')
     })
   );
 
