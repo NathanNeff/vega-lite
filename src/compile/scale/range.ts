@@ -387,6 +387,8 @@ function sizeRangeMin(mark: Mark, zero: boolean, config: Config) {
   throw new Error(log.message.incompatibleChannel('size', mark));
 }
 
+export const MAX_SIZE_RANGE_STEP_RATIO = 0.95;
+
 function sizeRangeMax(
   mark: Mark,
   xyRangeSteps: (number | SignalRefComponent)[],
@@ -420,9 +422,9 @@ function sizeRangeMax(
       // TODO: leverage Vega-Expression to write this formula only once
       const pointStep = minXYRangeStep(xyRangeSteps, scaleConfig);
       if (pointStep instanceof SignalRefComponent) {
-        return pointStep.map(expr => `pow(${expr} - 2, 2) `);
+        return pointStep.map(expr => `pow(${MAX_SIZE_RANGE_STEP_RATIO} * ${expr}, 2) `);
       } else {
-        return (pointStep - 2) * (pointStep - 2);
+        return MAX_SIZE_RANGE_STEP_RATIO * pointStep * MAX_SIZE_RANGE_STEP_RATIO * pointStep;
       }
   }
   /* istanbul ignore next: should never reach here */

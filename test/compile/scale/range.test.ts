@@ -3,6 +3,7 @@
 import {
   defaultContinuousToDiscreteCount,
   interpolateRange,
+  MAX_SIZE_RANGE_STEP_RATIO,
   parseRangeForChannel
 } from '../../../src/compile/scale/range';
 import {SignalRefComponent} from '../../../src/compile/signal';
@@ -576,7 +577,7 @@ describe('compile/scale', () => {
                 'plot_width',
                 [11, 13] // xyRangeSteps
               )
-            ).toEqual(makeImplicit([0, 81]));
+            ).toEqual(makeImplicit([0, MAX_SIZE_RANGE_STEP_RATIO * 11 * MAX_SIZE_RANGE_STEP_RATIO * 11]));
           }
         });
 
@@ -595,7 +596,7 @@ describe('compile/scale', () => {
                 'plot_width',
                 [11, 13] // xyRangeSteps
               )
-            ).toEqual(makeImplicit([9, 81]));
+            ).toEqual(makeImplicit([9, MAX_SIZE_RANGE_STEP_RATIO * 11 * MAX_SIZE_RANGE_STEP_RATIO * 11]));
           }
         });
 
@@ -614,7 +615,7 @@ describe('compile/scale', () => {
                 'plot_width',
                 [11, 13] // xyRangeSteps
               )
-            ).toEqual(makeImplicit([9, 81]));
+            ).toEqual(makeImplicit([9, MAX_SIZE_RANGE_STEP_RATIO * 11 * MAX_SIZE_RANGE_STEP_RATIO * 11]));
           }
         });
 
@@ -633,7 +634,7 @@ describe('compile/scale', () => {
                 'plot_width',
                 [11] // xyRangeSteps only have one value
               )
-            ).toEqual(makeImplicit([0, 81]));
+            ).toEqual(makeImplicit([0, MAX_SIZE_RANGE_STEP_RATIO * 11 * MAX_SIZE_RANGE_STEP_RATIO * 11]));
           }
         });
 
@@ -653,7 +654,7 @@ describe('compile/scale', () => {
                 'plot_width',
                 []
               )
-            ).toEqual(makeImplicit([9, 114, 219, 324]));
+            ).toEqual(makeImplicit(interpolateRange(9, 361, 4)));
           });
         });
 
@@ -671,7 +672,7 @@ describe('compile/scale', () => {
               'plot_width',
               []
             )
-          ).toEqual(makeImplicit([9, 166.5, 324]));
+          ).toEqual(makeImplicit(interpolateRange(9, 361, 3)));
         });
       });
     });
