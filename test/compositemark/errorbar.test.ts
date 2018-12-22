@@ -62,8 +62,8 @@ describe('normalizeErrorBar with raw data input', () => {
             y2: {field: 'upper_people', type: 'quantitative'},
             x: {field: 'age', type: 'ordinal'},
             tooltip: [
-              {field: 'upper_people', title: 'mean + stderr of people', type: 'quantitative'},
-              {field: 'lower_people', title: 'mean - stderr of people', type: 'quantitative'},
+              {field: 'upper_people', title: 'Mean + stderr of people', type: 'quantitative'},
+              {field: 'lower_people', title: 'Mean - stderr of people', type: 'quantitative'},
               {field: 'age', type: 'ordinal'}
             ]
           }

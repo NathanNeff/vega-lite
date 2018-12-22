@@ -411,8 +411,8 @@ function errorBarAggregationAndCalculation<
       ];
 
       tooltipSummary = [
-        {fieldPrefix: 'upper', titlePrefix: titleCase(center, extent, '+')},
-        {fieldPrefix: 'lower', titlePrefix: titleCase(center, extent, '-')}
+        {fieldPrefix: 'upper', titlePrefix: getTitlePrefix(center, extent, '+')},
+        {fieldPrefix: 'lower', titlePrefix: getTitlePrefix(center, extent, '-')}
       ];
     } else {
       if (markDef.center && markDef.extent) {
@@ -475,6 +475,10 @@ function errorBarAggregationAndCalculation<
   return {postAggregateCalculates, errorBarSpecificAggregate, tooltipSummary};
 }
 
-function titleCase(center: ErrorBarCenter, extent: ErrorBarExtent, operation: '+' | '-'): string {
-  return center + ' ' + operation + ' ' + extent;
+function getTitlePrefix(center: ErrorBarCenter, extent: ErrorBarExtent, operation: '+' | '-'): string {
+  return titleCase(center) + ' ' + operation + ' ' + extent;
+}
+
+function titleCase(word: string): string {
+  return word.charAt(0).toUpperCase() + word.substring(1);
 }
