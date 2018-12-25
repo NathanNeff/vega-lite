@@ -79,7 +79,7 @@ export function makeCompositeAggregatePartFactory<P extends PartsMixins<any>>(
     mark: Mark | MarkDef;
     positionPrefix: string;
     endPositionPrefix?: string;
-    extraEncoding: Encoding<string>;
+    extraEncoding?: Encoding<string>;
   }) => {
     const title =
       axis && axis.title !== undefined
