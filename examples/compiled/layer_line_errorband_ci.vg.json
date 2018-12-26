@@ -41,9 +41,9 @@
         {
           "type": "aggregate",
           "groupby": ["year_Year"],
-          "ops": ["ci1"],
-          "fields": ["Miles_per_Gallon"],
-          "as": ["upper_Miles_per_Gallon"]
+          "ops": ["ci0", "ci1"],
+          "fields": ["Miles_per_Gallon", "Miles_per_Gallon"],
+          "as": ["lower_Miles_per_Gallon", "upper_Miles_per_Gallon"]
         }
       ]
     }

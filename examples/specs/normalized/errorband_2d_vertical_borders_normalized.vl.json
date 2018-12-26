@@ -6,7 +6,7 @@
     {
       "aggregate": [
         {
-          "op": "ci1",
+          "op": "ci0",
           "field": "Miles_per_Gallon",
           "as": "lower_Miles_per_Gallon"
         },

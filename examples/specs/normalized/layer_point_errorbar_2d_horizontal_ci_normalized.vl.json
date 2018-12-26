@@ -6,7 +6,7 @@
       "transform": [
         {
           "aggregate": [
-            {"op": "ci1", "field": "yield", "as": "lower_yield"},
+            {"op": "ci0", "field": "yield", "as": "lower_yield"},
             {"op": "ci1", "field": "yield", "as": "upper_yield"}
           ],
           "groupby": ["variety"]
