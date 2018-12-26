@@ -439,7 +439,7 @@ function errorBarAggregationAndCalculation<
       const lowerExtent = extent === 'ci' ? 'ci0' : 'q1';
 
       errorBarSpecificAggregate = [
-        {op: upperExtent, field: continuousFieldName, as: 'lower_' + continuousFieldName},
+        {op: lowerExtent, field: continuousFieldName, as: 'lower_' + continuousFieldName},
         {op: upperExtent, field: continuousFieldName, as: 'upper_' + continuousFieldName}
       ];
 
