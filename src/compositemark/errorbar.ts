@@ -8,7 +8,7 @@ import {isMarkDef, MarkDef} from '../mark';
 import {GenericUnitSpec, NormalizedLayerSpec} from '../spec';
 import {TitleParams} from '../title';
 import {AggregatedFieldDef, CalculateTransform, Transform} from '../transform';
-import {Flag, keys} from '../util';
+import {Flag, keys, titlecase} from '../util';
 import {Orient} from '../vega.schema';
 import {
   compositeMarkContinuousAxis,
@@ -492,9 +492,5 @@ function errorBarAggregationAndCalculation<
 }
 
 function getTitlePrefix(center: ErrorBarCenter, extent: ErrorBarExtent, operation: '+' | '-'): string {
-  return titleCase(center) + ' ' + operation + ' ' + extent;
-}
-
-function titleCase(word: string): string {
-  return word.charAt(0).toUpperCase() + word.substring(1);
+  return titlecase(center) + ' ' + operation + ' ' + extent;
 }
