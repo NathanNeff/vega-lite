@@ -736,34 +736,42 @@ describe('normalizeErrorBar with aggregated upper and lower bound input', () => 
   const mark = 'errorbar';
 
   it('should produce correct layered specs for vertical errorbar with aggregated upper and lower bound input', () => {
-    expect(normalize({data, mark: 'errorbar', encoding: {x: {field: 'age', type: 'ordinal'}, y: {field: 'people', type: 'quantitative'}, y2: {field: 'people2', type: 'quantitative'}}}, defaultConfig)).toEqual(
-      {
-        data,
-        transform: [
-          {calculate: 'datum.people2', as: 'upper_people'},
-          {calculate: 'datum.people', as: 'lower_people'}
-        ],
-        layer: [
-          {
-            mark: {type: 'rule', style: 'errorbar-rule'},
-            encoding: {
-              y: {
-                field: 'lower_people',
-                type: 'quantitative',
-                title: 'people'
-              },
-              y2: {field: 'upper_people', type: 'quantitative'},
-              x: {field: 'age', type: 'ordinal'},
-              tooltip: [
-                {field: 'upper_people', title: 'people2', type: 'quantitative'},
-                {field: 'lower_people', title: 'people', type: 'quantitative'},
-                {field: 'age', type: 'ordinal'}
-              ]
-            }
+    expect(
+      normalize(
+        {
+          data,
+          mark: 'errorbar',
+          encoding: {
+            x: {field: 'age', type: 'ordinal'},
+            y: {field: 'people', type: 'quantitative'},
+            y2: {field: 'people2', type: 'quantitative'}
           }
-        ]
-      }
-    );
+        },
+        defaultConfig
+      )
+    ).toEqual({
+      data,
+      transform: [{calculate: 'datum.people2', as: 'upper_people'}, {calculate: 'datum.people', as: 'lower_people'}],
+      layer: [
+        {
+          mark: {type: 'rule', style: 'errorbar-rule'},
+          encoding: {
+            y: {
+              field: 'lower_people',
+              type: 'quantitative',
+              title: 'people'
+            },
+            y2: {field: 'upper_people', type: 'quantitative'},
+            x: {field: 'age', type: 'ordinal'},
+            tooltip: [
+              {field: 'upper_people', title: 'people2', type: 'quantitative'},
+              {field: 'lower_people', title: 'people', type: 'quantitative'},
+              {field: 'age', type: 'ordinal'}
+            ]
+          }
+        }
+      ]
+    });
   });
 
   it('should produce correct layered specs for horizontal errorbar with aggregated upper and lower bound input', () => {
