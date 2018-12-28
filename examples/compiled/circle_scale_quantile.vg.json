@@ -73,7 +73,7 @@
       "name": "size",
       "type": "quantile",
       "domain": {"data": "source_0", "field": "b"},
-      "range": [9, 114, 219, 324]
+      "range": [9, 126.33333333333333, 243.66666666666666, 361]
     }
   ],
   "axes": [
