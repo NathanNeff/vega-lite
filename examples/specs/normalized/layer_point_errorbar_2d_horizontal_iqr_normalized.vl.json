@@ -28,12 +28,12 @@
               {
                 "field": "upper_yield",
                 "type": "quantitative",
-                "title": "q3 of yield"
+                "title": "Q3 of yield"
               },
               {
                 "field": "lower_yield",
                 "type": "quantitative",
-                "title": "q1 of yield"
+                "title": "Q1 of yield"
               },
               {"field": "variety", "type": "ordinal"}
             ]

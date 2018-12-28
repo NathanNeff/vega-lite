@@ -43,12 +43,12 @@
               {
                 "field": "upper_Miles_per_Gallon",
                 "type": "quantitative",
-                "title": "ci1 of Miles_per_Gallon"
+                "title": "Ci1 of Miles_per_Gallon"
               },
               {
                 "field": "lower_Miles_per_Gallon",
                 "type": "quantitative",
-                "title": "ci0 of Miles_per_Gallon"
+                "title": "Ci0 of Miles_per_Gallon"
               },
               {
                 "title": "Year (year)",
@@ -79,12 +79,12 @@
               {
                 "field": "upper_Miles_per_Gallon",
                 "type": "quantitative",
-                "title": "ci1 of Miles_per_Gallon"
+                "title": "Ci1 of Miles_per_Gallon"
               },
               {
                 "field": "lower_Miles_per_Gallon",
                 "type": "quantitative",
-                "title": "ci0 of Miles_per_Gallon"
+                "title": "Ci0 of Miles_per_Gallon"
               },
               {
                 "title": "Year (year)",
@@ -115,12 +115,12 @@
               {
                 "field": "upper_Miles_per_Gallon",
                 "type": "quantitative",
-                "title": "ci1 of Miles_per_Gallon"
+                "title": "Ci1 of Miles_per_Gallon"
               },
               {
                 "field": "lower_Miles_per_Gallon",
                 "type": "quantitative",
-                "title": "ci0 of Miles_per_Gallon"
+                "title": "Ci0 of Miles_per_Gallon"
               },
               {
                 "title": "Year (year)",

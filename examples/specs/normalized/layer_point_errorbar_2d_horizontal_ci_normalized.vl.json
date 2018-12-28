@@ -28,12 +28,12 @@
               {
                 "field": "upper_yield",
                 "type": "quantitative",
-                "title": "ci1 of yield"
+                "title": "Ci1 of yield"
               },
               {
                 "field": "lower_yield",
                 "type": "quantitative",
-                "title": "ci0 of yield"
+                "title": "Ci0 of yield"
               },
               {"field": "variety", "type": "ordinal"}
             ]
